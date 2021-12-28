@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Data
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Расходы</h3>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Дата</th>
+                  <th>Категория</th>
+                  <th>Сумма</th>
+                  <th>Где потрачено</th>
+                  <th>Комментарии</th>
+                  <th>Редактирование</th>
+                  <th>Удаление</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for cost in costs %}
+                <tr>
+                  <td>{{ cost.data }}</td>
+                  <td>{{ cost.category }}</td>
+                  <td>{{ cost.amount }}</td>
+                  <td>{{ cost.place_where_spent }}</td>
+                  <td>{{ cost.comments }}</td>
+                  <td><a href="{% url 'update_costs' cost.id %}">Редактировать</a></td>
+                  <td>
+                    <form id="delete_form_{{ cost.id }}" action="{% url 'delete_costs' cost.id %}" method="post">{% csrf_token %}</form>
+                    <a href="javascript:void()" onclick="delete_question_{{ cost.id }}()">Удалить</a>
+                    <script>
+                      function delete_question_{{ cost.id }}() {
+                        if (confirm("Вы уверены?")) {
+                          document.getElementById('delete_form_{{ cost.id }}').submit()
+                        }
+                      }
+                    </script>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Дата</th>
+                  <th>Категория</th>
+                  <th>Сумма</th>
+                  <th>Где потрачено</th>   
+                  <th>Комментарии</th>
+                  <th>Редактирование</th>
+                  <th>Удаление</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div><!-- /.box-body -->
+        </div><!-- /.box -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+
+
+{% endblock %}
