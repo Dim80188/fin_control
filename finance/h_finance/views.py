@@ -134,7 +134,7 @@ class WeekCosts(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        
+
         now = datetime.now() - timedelta(minutes=60*24*7)
         return Costs.objects.filter(author=self.request.user, data__gte=now)
 
@@ -154,13 +154,16 @@ class MonthCosts(LoginRequiredMixin, ListView):
         now = datetime.now() - timedelta(minutes=60*24*30)
         return Costs.objects.filter(author=self.request.user, data__gte=now)
 
+
+
+
 def select_period(request):
     if request.method == 'POST':
         form = SelectPeriodForm(request.POST)
         if form.is_valid():
             start_c = form.cleaned_data['start_data']
             end_c = form.cleaned_data['end_data']
-            tranz_p = Costs.objects.filter(data__range=(start_c, end_c))
+            tranz_p = Costs.objects.filter(author=request.user, data__range=(start_c, end_c))
             return render(request, 'h_finance/view_selected_costs.html', {'tranz_p': tranz_p})
 
     else:

@@ -29,8 +29,10 @@
                   <th>Дата</th>
                   <th>Категория</th>
                   <th>Сумма</th>
-                  <th>Где портачено</th>
+                  <th>Где потрачено</th>
                   <th>Комментарии</th>
+                  <th>Редактирование</th>
+                  <th>Удаление</th>
                 </tr>
               </thead>
               <tbody>
@@ -41,6 +43,18 @@
                   <td>{{ cost.amount }}</td>
                   <td>{{ cost.place_where_spent }}</td>
                   <td>{{ cost.comments }}</td>
+                  <td><a href="{% url 'update_costs' cost.id %}">Редактировать</a></td>
+                  <td>
+                    <form id="delete_form_{{ cost.id }}" action="{% url 'delete_costs' cost.id %}" method="post">{% csrf_token %}</form>
+                    <a href="javascript:void()" onclick="delete_question_{{ cost.id }}()">Удалить</a>
+                    <script>
+                      function delete_question_{{ cost.id }}() {
+                        if (confirm("Вы уверены?")) {
+                          document.getElementById('delete_form_{{ cost.id }}').submit()
+                        }
+                      }
+                    </script>
+                  </td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -49,8 +63,10 @@
                   <th>Дата</th>
                   <th>Категория</th>
                   <th>Сумма</th>
-                  <th>Где портачено</th>
+                  <th>Где потрачено</th>
                   <th>Комментарии</th>
+                  <th>Редактирование</th>
+                  <th>Удаление</th>
                 </tr>
               </tfoot>
             </table>
