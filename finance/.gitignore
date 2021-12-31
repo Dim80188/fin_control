@@ -5,4 +5,4 @@ cpython-38.pyc
 *~
 __pycache__
 venv
-db.sqlite3
+/db.sqlite3
