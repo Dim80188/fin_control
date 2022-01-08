@@ -1,0 +1,10 @@
+
+__pycache__
+cpython-38.pyc
+.env
+/static
+*.pyc
+*~
+__pycache__
+venv
+/db.sqlite3
