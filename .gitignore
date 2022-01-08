@@ -1,5 +1,5 @@
 cpython-38.pyc
-.env
+/.env
 /static
 *.pyc
 *~
