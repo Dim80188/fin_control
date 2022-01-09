@@ -13,6 +13,7 @@ urlpatterns = [
     path('add_costs/', AddCosts.as_view(), name='add_costs'),
     path('add_inkome/', AddInkome.as_view(), name='add_inkome'),
     path('view_all_costs/', AllCosts.as_view(), name='all_costs'),
+    path('view_all_inkome/', AllInkome.as_view(), name='all_inkome'),
     path('update_costs/<int:pk>/', UpdateCosts.as_view(), name='update_costs'),
     path('delete_costs/<int:pk>/', DeleteCosts.as_view(), name='delete_costs'),
     path('view_day_costs/', DayCosts.as_view(), name='day_costs'),

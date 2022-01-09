@@ -118,6 +118,20 @@ class AllCosts(LoginRequiredMixin, ListView):
 
         return Costs.objects.filter(author=self.request.user)
 
+class AllInkome(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Inkome
+    template_name = 'h_finance/view_inkome.html'
+    context_object_name = 'inkome'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Доходы'
+        return context
+
+    def get_queryset(self):
+        return Inkome.objects.filter(author=self.request.user)
+
 class DayCosts(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Costs
