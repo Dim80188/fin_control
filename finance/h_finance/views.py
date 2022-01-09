@@ -90,6 +90,18 @@ class AddCosts(LoginRequiredMixin, CreateView):
         self.object.save()
         return super().form_valid(form)
 
+class AddInkome(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    form_class = InkomForm
+    template_name = 'h_finance/add_inkome.html'
+    success_url = reverse_lazy('add_inkome')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
 
 class AllCosts(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
