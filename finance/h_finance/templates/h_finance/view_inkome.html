@@ -38,22 +38,11 @@
               <tbody>
                 {% for ink in inkome %}
                 <tr>
-                  <td>{{ ink.data }}</td>
+                  <td>{{ ink.data_i }}</td>
                   <td>{{ ink.title }}</td>
                   <td>{{ ink.amount }}</td>
                   <td>{{ ink.comments }}</td>
-                  <td><a href="{% url 'update_costs' cost.id %}">Редактировать</a></td>
-                  <td>
-                    <form id="delete_form_{{ cost.id }}" action="{% url 'delete_costs' cost.id %}" method="post">{% csrf_token %}</form>
-                    <a href="javascript:void()" onclick="delete_question_{{ cost.id }}()">Удалить</a>
-                    <script>
-                      function delete_question_{{ cost.id }}() {
-                        if (confirm("Вы уверены?")) {
-                          document.getElementById('delete_form_{{ cost.id }}').submit()
-                        }
-                      }
-                    </script>
-                  </td>
+
                 </tr>
                 {% endfor %}
               </tbody>

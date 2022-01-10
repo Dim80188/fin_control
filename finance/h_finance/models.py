@@ -34,10 +34,10 @@ class Costs(models.Model):
 class Inkome(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', blank=True, null=True)
     title = models.CharField(max_length=150, blank=True)
-    data = models.DateField()
+    data_i = models.DateField(null=True)
     created_at = models.DateField(auto_now_add=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     comments = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['-data']
+        ordering = ['-data_i']
