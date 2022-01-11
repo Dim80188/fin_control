@@ -103,6 +103,7 @@ class AddInkome(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+
 class AllCosts(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Costs
@@ -131,6 +132,7 @@ class AllInkome(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Inkome.objects.filter(author=self.request.user)
+
 
 class DayCosts(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')

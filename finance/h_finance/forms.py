@@ -45,9 +45,9 @@ class SelectPeriodForm(forms.Form):
 
 class InkomForm(forms.ModelForm):
     title = forms.CharField(label='Название', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    data_i = forms.DateField()
+    data = forms.DateField()
     amount = forms.DecimalField(max_digits=10, decimal_places=2, label='Сумма', widget=forms.NumberInput(attrs={'class': 'form-control'}))
     comments = forms.CharField(label='Комментарии', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     class Meta:
         model = Inkome
-        fields = ['title', 'amount', 'comments']
+        fields = ['data', 'title', 'amount', 'comments']

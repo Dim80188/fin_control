@@ -22,6 +22,8 @@ class CostsAdmin(admin.ModelAdmin):
     list_filter = ('category',)
 
 
+
+
 admin.site.register(Category)
 admin.site.register(Costs, CostsAdmin)
 
