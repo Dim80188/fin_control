@@ -142,13 +142,28 @@ class DayCosts(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Список расходов за 1 день'
+        context['title'] = 'Список расходов за сегодня'
         return context
 
     def get_queryset(self):
 
         now = datetime.now()
         return Costs.objects.filter(author=self.request.user, data__gte=now)
+
+class DayInkome(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Inkome
+    template_name = 'h_finance/view_inkome.html'
+    context_object_name = 'inkome'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Доходы за сегодня'
+        return context
+
+    def get_queryset(self):
+        now = datetime.now()
+        return Inkome.objects.filter(author=self.request.user, data__gte=now)
 
 class WeekCosts(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
@@ -165,6 +180,21 @@ class WeekCosts(LoginRequiredMixin, ListView):
 
         now = datetime.now() - timedelta(minutes=60*24*7)
         return Costs.objects.filter(author=self.request.user, data__gte=now)
+
+class WeekInkome(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Inkome
+    template_name = 'h_finance/view_inkome.html'
+    context_object_name = 'inkome'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Доходы за неделю'
+        return context
+
+    def get_queryset(self):
+        now = datetime.now() - timedelta(minutes=60*24*7)
+        return Inkome.objects.filter(author=self.request.user, data__gte=now)
 
 class MonthCosts(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
