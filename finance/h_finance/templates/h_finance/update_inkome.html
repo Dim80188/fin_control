@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+    <h1>
+      Обновить данные
+      {% if success_update %}
+
+      {% endif %}
+    </h1>
+
+  </section>
+
+
+  <!-- Main content -->
+
+  <section class="content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box-body">
+          <form action="{{ .get_update_url }}" method="post">
+            {% csrf_token %}
+            {{ form.non_field.errors }}
+            <div class="form-group">
+              <label for="{{ form.title.id_for_label }}">Название</label>
+              {{ form.title }}
+              <div class="invalid-feedback">
+                {{ form.title.errors }}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.category.id_for_label }}">Категория</label>
+              {{ form.category }}
+              <div class="invalid-feedback">
+                {{ form.category.errors }}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.data.id_for_label }}">Дата</label>
+              <input type="date" name="data" >
+
+              <!-- {{ form.data }} -->
+
+              <div class="invalid-feedback">
+                {{ form.data.errors }}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.amount.id_for_label }}">Сумма</label>
+              {{ form.amount }}
+              <div class="invalid-feedback">
+                {{ form.amount.errors }}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.place_where_spent.id_for_label }}">Где портачено</label>
+              {{ form.place_where_spent }}
+              <div class="invalid-feedback">
+                {{ form.place_where_spent.errors }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="{{ form.comments.id_for_label }}">Комментарии</label>
+              {{ form.comments }}
+              <div class="invalid-feedback">
+                {{ form.comments.errors }}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Обновить</button>
+
+          </form>
+        </div>
+      </div><!--/.col (right) -->
+    </div>   <!-- /.row -->
+  </section><!-- /.content -->
+
+</div>
+
+<!-- <script type="text/text/javascript">
+  $(function () {
+    $("datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+  });
+</script> -->
+
+{% endblock %}

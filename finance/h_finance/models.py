@@ -38,5 +38,8 @@ class Inkome(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     comments = models.TextField(blank=True)
 
+    def get_update_url(self):
+        return reverse('update_inkome', kwargs={'pk': self.pk})
+
     class Meta:
         ordering = ['-data']

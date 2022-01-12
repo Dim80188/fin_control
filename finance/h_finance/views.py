@@ -267,6 +267,18 @@ class UpdateCosts(LoginRequiredMixin, UpdateView):
             return self.handle_no_permission()
         return kwargs
 
+class UpdateInkome(LoginRequiredMixin, UpdateView):
+    model = Inkome
+    template_name = 'h_finance/update_inkome.html'
+    form_class = InkomForm
+    success_url = reverse_lazy('home')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if self.request.user != kwargs['instance'].author:
+            return self.handle_no_permission()
+        return kwargs
+
 class DeleteCosts(LoginRequiredMixin, DeleteView):
     model = Costs
     template_name = 'h_finance/view_all_costs.html'
