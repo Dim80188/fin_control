@@ -212,7 +212,19 @@ class MonthCosts(LoginRequiredMixin, ListView):
         now = datetime.now() - timedelta(minutes=60*24*30)
         return Costs.objects.filter(author=self.request.user, data__gte=now)
 
+class MonthInkome(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Inkome
+    template_name = 'h_finance/view_inkome.html'
+    context_object_name = 'inkome'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Доходы за месяц'
+        return context
 
+    def get_queryset(self):
+        now = datetime.now() - timedelta(minutes=60*24*30)
+        return Inkome.objects.filter(author=self.request.user, data__gte=now)
 
 
 def select_period(request):
