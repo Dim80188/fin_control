@@ -240,6 +240,21 @@ def select_period(request):
         form = SelectPeriodForm()
     return render(request, 'h_finance/select_period.html', {'form': form})
 
+def select_period_ink(request):
+    if request.method == 'POST':
+        form = SelectPeriodForm(request.POST)
+        if form.is_valid():
+            start_c = form.cleaned_data['start_data']
+            end_c = form.cleaned_data['end_data']
+            inkome = Inkome.objects.filter(author=request.user, data__range=(start_c, end_c))
+            return render(request, 'h_finance/view_inkome.html', {'inkome': inkome})
+
+    else:
+        form = SelectPeriodForm()
+    return render(request, 'h_finance/select_period_ink.html', {'form': form})
+
+
+
 class UpdateCosts(LoginRequiredMixin, UpdateView):
     model = Costs
     template_name = 'h_finance/update_cost.html'

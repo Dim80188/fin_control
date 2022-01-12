@@ -24,4 +24,6 @@ urlpatterns = [
     path('view_month_inkome', MonthInkome.as_view(), name='month_inkome'),
     path('select_period/', select_period, name='select_period'),
     path('view_selected_costs', select_period, name='view_selected_costs'),
+    path('select_period_ink/', select_period_ink, name='select_period_ink'),
+    path('view_selected_inkome/', select_period_ink, name = 'view_selected_inkome'),
 ]
