@@ -292,6 +292,18 @@ class DeleteCosts(LoginRequiredMixin, DeleteView):
         self.object.delete()
         return HttpResponseRedirect(success_url)
 
+class DeleteInkome(LoginRequiredMixin, DeleteView):
+    model = Inkome
+    template_name = 'h_finance/view_inkome.html'
+    success_url = reverse_lazy('home')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.request.user != self.object.author:
+            return self.handle_no_permission()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url) 
 
 
 # def update_costs(request, pk):
